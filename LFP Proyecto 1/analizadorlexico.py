@@ -68,7 +68,8 @@ def instruccion(cadena):
             cadena = cadena[1:]
             puntero = 0
             n_columna += 1
-
+    for lexema in lista_lexemas:
+        print(lexema)
 
 
 def armar_lexema(cadena):
@@ -85,3 +86,18 @@ def armar_lexema(cadena):
             lexema += char
            
     return None, None
+def armar_numero(cadena):
+    numero = ''
+    puntero = ''
+    is_decimal = False
+    for char in cadena:
+        puntero += char
+        if char == '.':
+            is_decimal = True
+        if char == ' ' or char == '"' or char == '\n' or char == '\t':
+            if is_decimal:
+                return float(numero), cadena[len(puntero)-1:]
+            else:
+                return int(numero), cadena[len(puntero)-1:]
+        else:
+            numero += char
