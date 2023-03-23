@@ -35,6 +35,8 @@ global instrucciones
 global lista_lexemas
 n_linea = 1
 n_columna = 1
+lista_lexemas = []
+instrucciones = []
 #instrucciones
 def instruccion(cadena):
     global n_linea
@@ -47,6 +49,12 @@ def instruccion(cadena):
         puntero += 1
         if char == '\"':
             lexema, cadena = armar_lexema(cadena[puntero:])
+            if lexema and cadena:
+                n_columna += 1
+                #Armar Lexema
+                lista_lexemas.append(lexema)
+                n_columna += len(lexema) + 1
+                puntero = 0
 
 
 def armar_lexema(cadena):
@@ -62,4 +70,4 @@ def armar_lexema(cadena):
         else:
             lexema += char
            
-    
+    return None, None
