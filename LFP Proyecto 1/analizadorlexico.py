@@ -55,6 +55,20 @@ def instruccion(cadena):
                 lista_lexemas.append(lexema)
                 n_columna += len(lexema) + 1
                 puntero = 0
+        elif char == "\t":
+            n_columna += 4
+            cadena = cadena[4:]
+            puntero =  0
+        elif char == "\n":
+            cadena = cadena[1:]
+            puntero = 0
+            n_linea += 1
+            n_columna = 1
+        else:
+            cadena = cadena[1:]
+            puntero = 0
+            n_columna += 1
+
 
 
 def armar_lexema(cadena):
