@@ -46,7 +46,7 @@ def instruccion(cadena):
         char = cadena[puntero]
         puntero += 1
         if char == '\"':
-            lexema = armar_lexema(cadena[puntero:])
+            lexema, cadena = armar_lexema(cadena[puntero:])
 
 
 def armar_lexema(cadena):
@@ -58,7 +58,7 @@ def armar_lexema(cadena):
     for char in cadena:
         puntero += char
         if char == '\"':
-            return lexema
+            return lexema, cadena[len(puntero):]
         else:
             lexema += char
            
