@@ -1,14 +1,10 @@
-from fileinput import filename
-from tkinter.filedialog import askopenfilename
-from tkinter import filedialog
-from tkinter.tix import Tree
-from tkinter import Tk
+from tkinter.filedialog import askopenfilename, asksaveasfilename
 from tkinter import *
 from tkinter import ttk
 from analizadorlexico import instruccion, operar2
 import tkinter as tk
 import os
-import subprocess
+
 
 
 class Pantalla_Principal():
@@ -17,32 +13,47 @@ class Pantalla_Principal():
         self.PP = Tk()
         self.PP.title("Pantalla Principal")
         self.PP.geometry("1000x700")
-        self.PP.configure(bg = "#102027")
-        self.PP
+        self.PP.configure(bg="#102027")
         self.pantalla_1()
-        
         
     def pantalla_1(self):
         self.Frame = Frame()
-        self.Frame.config(bg ="purple4")
+        self.Frame.config(bg="gray")
         self.Frame.config(bd=15)
-        self.Frame.config(relief="sunken")  #Le da el borde
+        self.Frame.config(relief="sunken")  # Le da el borde
         self.Frame.config(cursor="hand2")
-        self.Frame.pack(side=tk.LEFT, fill="x") 
+        self.Frame.pack(side=tk.LEFT, fill="x")
         self.Frame.configure(height=800, width=600)
-        self.text = ''
-        
-        Button(self.Frame, command=self.abrir_archivo ,text="Abrir Archivo", font=("Arial Black", 18), fg="AntiqueWhite3", bg="blue4", width=15).place(x=200, y=50)
-        
-        Button(self.Frame ,text="Guardar", font=("Arial Black", 18),fg="AntiqueWhite3", bg="blue4", width=15).place(x=200, y=150)
-        
-        Button(self.Frame, command=self.guardar_como ,text="Guardar Como", font=("Arial Black", 18),fg="AntiqueWhite3", bg="blue4", width=15).place(x=200, y=250)
-        
-        Button(self.Frame, command=self.ejecutar ,text="Ejecutar", font=("Arial Black", 18), fg="AntiqueWhite3", bg="blue4", width=15).place(x=200, y=350)
-        
-        Button(self.Frame,text="Errores", font=("Arial Black", 18), fg="AntiqueWhite3", bg="blue4", width=15).place(x=200, y=450)
-        
-        Button(self.Frame, text="Cerrar Ventana", command=self.PP.destroy, font=("Arial Black", 18), fg="AntiqueWhite3", bg="blue4", width=15).place(x=200, y=550)
+        self.text = ""
+
+        Button(self.Frame, command=self.abrir_archivo, text="Abrir Archivo", font=("Arial Black Italic", 18), fg="AntiqueWhite3", bg="blue4", width=15).place(x=200, y=50)
+
+        Button(self.Frame, text="Guardar", font=("Arial Black Italic", 18), fg="AntiqueWhite3", bg="blue4", width=15).place(x=200, y=150)
+
+        Button(self.Frame, command=self.guardar_como, text="Guardar Como", font=("Arial Black Italic", 18), fg="AntiqueWhite3", bg="blue4", width=15).place(x=200, y=250)
+
+        Button(self.Frame, command=self.ejecutar, text="Ejecutar", font=("Arial Black Italic", 18), fg="AntiqueWhite3", bg="blue4", width=15).place(x=200, y=350)
+
+        Button(self.Frame, text="Errores", font=("Arial Black Italic", 18), fg="AntiqueWhite3", bg="blue4", width=15).place(x=200, y=450)
+
+        Button(self.Frame, text="Cerrar Ventana", command=self.PP.destroy, font=("Arial Black Italic", 18), fg="AntiqueWhite3", bg="blue4", width=15).place(x=200, y=550)
+
+        self.Frame = Frame()
+        self.Frame.config(bg="tan")
+        self.Frame.config(bd=15)
+        self.Frame.config(relief="sunken")  # Le da el borde
+        self.Frame.config(cursor="hand2")
+        self.Frame.pack(side=tk.RIGHT, fill="x")
+        self.Frame.configure(height=800, width=600)
+        self.text = ""
+
+        Button(self.Frame, text="Manual Tecnico", font=("Arial Black Italic", 18), fg="AntiqueWhite2", bg="azure4", width=10).place(x=200, y=50)
+
+        Button(self.Frame, command=self.abrir_manual_usuario, text="Manual de Usuario", font=("Arial Black Italic", 18), fg="AntiqueWhite1", bg="azure4", width=10).place(x=200, y=150)
+
+        Button(self.Frame, text="Ayuda", font=("Arial Black Italic", 18), fg="AntiqueWhite1", bg="azure4", width=10).place(x=200, y=250)
+
+        self.Frame.mainloop()
 
         #Text(self.Frame,font=("Arial", 15), fg="black", width=60, height=5).place(x=100,y=250)
         self.Frame = Frame()
