@@ -53,8 +53,17 @@ def instruccion(cadena):
                 n_columna += 1
                 #Armar Lexema
                 lista_lexemas.append(lexema)
-                n_columna += len(lexema) + 1
+                n_columna += len(str(lexema)) + 1 
                 puntero = 0
+        elif char.isdigit():
+            token, cadena = armar_numero(cadena)
+            if token and cadena:
+                n_columna += 1
+                lista_lexemas.append(token)
+                n_columna += len(str(token)) +1
+                puntero = 0
+            
+               
         elif char == "\t":
             n_columna += 4
             cadena = cadena[4:]
