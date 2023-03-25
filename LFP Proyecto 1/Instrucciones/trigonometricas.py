@@ -11,18 +11,18 @@ class Trigonometricas(Expression):
     def operar(self, arbol):
         leftValue = ''
         if self.left != None:
-            leftValue = self.left.operar(arbol)
-        if self.tipo.operar(arbol) == 'Seno':
+            leftValue = self.left.operar(arbol)   # Obtiene el valor de la expresión que está a la izquierda del operador
+        if self.tipo.operar(arbol) == 'Seno': # Si el operador es un seno
             return sin(leftValue)
-        elif self.tipo.operar(arbol) == 'Coseno':
+        elif self.tipo.operar(arbol) == 'Coseno': # Si el operador es un coseno
             return cos(leftValue)
-        elif self.tipo.operar(arbol) == 'Tangente':
+        elif self.tipo.operar(arbol) == 'Tangente': # Si el operador es una tangente
             return tan(leftValue)
         else:
             return None    
     
     def getFila(self):
-        return super().getFila()
+        return super().getFila() # Obtiene la fila de la clase padre
     
     def getColumna(self):
-        return super().getColumna()
+        return super().getColumna() # Devuelve la columna donde se encuentra la expresión
