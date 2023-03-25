@@ -1,6 +1,8 @@
 from tkinter.filedialog import askopenfilename, asksaveasfilename
 from tkinter import *
 from tkinter import ttk
+from tkinter.filedialog import askopenfilename
+from tkinter import filedialog
 from analizadorlexico import instruccion, operar2
 import tkinter as tk
 import os
