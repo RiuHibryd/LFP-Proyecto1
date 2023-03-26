@@ -40,7 +40,7 @@ class Pantalla_Principal():
 
         Button(self.Frame, text="Cerrar Ventana", command=self.PP.destroy, font=("Arial Black Italic", 18), fg="AntiqueWhite3", bg="red2", width=15).place(x=200, y=550)
 
-        Button(self.Frame, text="Manual Tecnico", font=("Arial Black Italic", 18), fg="AntiqueWhite2", bg="azure4", width=14).place(x=600, y=50)
+        Button(self.Frame, command = self.abrir_manual_tecnico,text="Manual Tecnico", font=("Arial Black Italic", 18), fg="AntiqueWhite2", bg="azure4", width=14).place(x=600, y=50)
 
         Button(self.Frame, command=self.abrir_manual_usuario, text="Manual de Usuario", font=("Arial Black Italic", 18), fg="AntiqueWhite1", bg="azure4", width=14).place(x=600, y=150)
 
@@ -82,6 +82,10 @@ class Pantalla_Principal():
         if filename:
             with open(filename, "w", encoding="utf-8") as outfile:
                 outfile.write(self.texto)
-
+    def abrir_manual_tecnico(self):
+        try:
+            os.startfile("./manual_tecnico.pdf")
+        except:
+            print("No se pudo abrir el archivo")
                 
 r = Pantalla_Principal()
