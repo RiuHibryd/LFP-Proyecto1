@@ -25,10 +25,10 @@ class Pantalla_Principal():
         self.Frame.config(relief="sunken")  # Le da el borde
         self.Frame.config(cursor="hand2")
         self.Frame.pack(side=tk.LEFT, fill="x")
-        self.Frame.configure(height=800, width=600)
+        self.Frame.configure(height=1500, width=1600)
         self.text = ""
 
-        Button(self.Frame, command=self.abrir_archivo, text="Abrir Archivo", font=("Arial Black Italic", 18), fg="AntiqueWhite3", bg="blue4", width=15).place(x=200, y=50)
+        Button(self.Frame, command=self.abrir_archivo, text="Cargar", font=("Arial Black Italic", 18), fg="AntiqueWhite3", bg="green2", width=15).place(x=200, y=50)
 
         Button(self.Frame, text="Guardar", font=("Arial Black Italic", 18), fg="AntiqueWhite3", bg="blue4", width=15).place(x=200, y=150)
 
@@ -36,44 +36,17 @@ class Pantalla_Principal():
 
         Button(self.Frame, command=self.ejecutar, text="Ejecutar", font=("Arial Black Italic", 18), fg="AntiqueWhite3", bg="blue4", width=15).place(x=200, y=350)
 
-        Button(self.Frame, text="Errores", font=("Arial Black Italic", 18), fg="AntiqueWhite3", bg="blue4", width=15).place(x=200, y=450)
+        Button(self.Frame, text="Errores", font=("Arial Black Italic", 18), fg="AntiqueWhite3", bg="red1", width=15).place(x=200, y=450)
 
-        Button(self.Frame, text="Cerrar Ventana", command=self.PP.destroy, font=("Arial Black Italic", 18), fg="AntiqueWhite3", bg="blue4", width=15).place(x=200, y=550)
+        Button(self.Frame, text="Cerrar Ventana", command=self.PP.destroy, font=("Arial Black Italic", 18), fg="AntiqueWhite3", bg="red2", width=15).place(x=200, y=550)
 
-        self.Frame = Frame()
-        self.Frame.config(bg="tan")
-        self.Frame.config(bd=15)
-        self.Frame.config(relief="sunken")  # Le da el borde
-        self.Frame.config(cursor="hand2")
-        self.Frame.pack(side=tk.RIGHT, fill="x")
-        self.Frame.configure(height=800, width=600)
-        self.text = ""
+        Button(self.Frame, text="Manual Tecnico", font=("Arial Black Italic", 18), fg="AntiqueWhite2", bg="azure4", width=14).place(x=600, y=50)
 
-        Button(self.Frame, text="Manual Tecnico", font=("Arial Black Italic", 18), fg="AntiqueWhite2", bg="azure4", width=10).place(x=200, y=50)
+        Button(self.Frame, command=self.abrir_manual_usuario, text="Manual de Usuario", font=("Arial Black Italic", 18), fg="AntiqueWhite1", bg="azure4", width=14).place(x=600, y=150)
 
-        Button(self.Frame, command=self.abrir_manual_usuario, text="Manual de Usuario", font=("Arial Black Italic", 18), fg="AntiqueWhite1", bg="azure4", width=10).place(x=200, y=150)
-
-        Button(self.Frame, text="Ayuda", font=("Arial Black Italic", 18), fg="AntiqueWhite1", bg="azure4", width=10).place(x=200, y=250)
+        Button(self.Frame, text="Ayuda", font=("Arial Black Italic", 18), fg="AntiqueWhite1", bg="azure4", width=10).place(x=630, y=250)
 
         self.Frame.mainloop()
-
-        #Text(self.Frame,font=("Arial", 15), fg="black", width=60, height=5).place(x=100,y=250)
-        self.Frame = Frame()
-        self.Frame.config(bg = "tan")
-        self.Frame.config(bd=15)
-        self.Frame.config(relief="sunken")  #Le da el borde
-        self.Frame.config(cursor="hand2")
-        self.Frame.pack(side=tk.RIGHT, fill="x")
-        self.Frame.configure(height=800, width=600)
-        self.text = ''
-        
-        Button(self.Frame,text="Manual Tecnico", font=("Arial Black", 18), fg="AntiqueWhite2", bg="azure4", width=10).place(x=200, y=50)
-        
-        Button(self.Frame ,text="Manual de Usuario", command=self.abrir_manual_usuario, font=("Arial Black", 18),fg="AntiqueWhite1", bg="azure4", width=10).place(x=200, y=150)
-        
-        Button(self.Frame,text="Ayuda", font=("Arial Black", 18), fg="AntiqueWhite1", bg="azure4", width=10).place(x=200, y=250)
-        self.Frame.mainloop()
-        
 
         
     def abrir_archivo(self):
