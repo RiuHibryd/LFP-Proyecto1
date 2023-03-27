@@ -199,6 +199,7 @@ def graficar(instruccion):
         graficar_nodo(dot, hash(instruccion), hijo)
     return dot.source
 
+
 '''def errores():
     global n_lineas
     global n_columnas
