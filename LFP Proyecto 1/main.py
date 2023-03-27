@@ -99,9 +99,6 @@ class Pantalla_Principal():
         except:
             print("No se pudo abrir el archivo")
 
-    def graficarAST(self):
-        ast = instruccion(self.texto)
-        return ast.graficar()
 
     def mostrarAST(self):
         try:
@@ -110,12 +107,6 @@ class Pantalla_Principal():
             graph.view()
         except Exception as e:
             messagebox.showerror("Error", str(e))
-
-    def graficar(self):
-        ast = instruccion(self.texto)
-        dot = Digraph(comment='AST', node_attr={'shape': 'circle', 'height': '.1'})
-        ast.graficar_nodo(dot, None, ast)
-        return dot.source
 
 
 r = Pantalla_Principal()
