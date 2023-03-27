@@ -2,6 +2,7 @@ from Instrucciones.aritmeticas import *
 from Instrucciones.trigonometricas import *
 from Abstract.lexema import *
 from Abstract.numero import *
+from graphviz import Digraph
 
 #Patron, Lexema, Token
 #Diccionarios
@@ -182,7 +183,21 @@ def operar2():
     #for instruccion in instrucciones:
         #print(instruccion.operar())
     return instrucciones
-        
+def graficar_nodo(dot, padre, hijo):
+    if hijo is not None:
+        hijo_id = str(hash(hijo))
+        if not hijo_id in dot.body:
+            dot.node(hijo_id, hijo.instruccion)
+            dot.edge(str(padre), hijo_id)
+            for nieto in hijo.hijos:
+                graficar_nodo(dot, hijo_id, nieto)
+
+def graficar(instruccion):
+    dot = Digraph(comment='AST')
+    dot.node(str(hash(instruccion)), instruccion.instruccion)
+    for hijo in instruccion.hijos:
+        graficar_nodo(dot, hash(instruccion), hijo)
+    return dot.source
 
 '''def errores():
     global n_lineas

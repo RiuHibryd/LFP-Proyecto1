@@ -6,7 +6,9 @@ from tkinter import filedialog
 from analizadorlexico import instruccion, operar2
 import tkinter as tk
 import os
-
+from tkinter import messagebox
+import graphviz
+from graphviz import Digraph
 
 
 class Pantalla_Principal():
@@ -46,6 +48,7 @@ class Pantalla_Principal():
 
         Button(self.Frame, text="Ayuda", font=("Arial Black Italic", 18), fg="AntiqueWhite1", bg="azure4", width=10).place(x=630, y=250)
 
+        Button(self.Frame, command = self.mostrarAST, text="Mostrar AST", font=("Arial Black Italic", 18), fg="AntiqueWhite1", bg="azure4", width=10).place(x=630, y=350)
         self.Frame.mainloop()
 
         
@@ -87,5 +90,24 @@ class Pantalla_Principal():
             os.startfile("./manual_tecnico.pdf")
         except:
             print("No se pudo abrir el archivo")
-                
+
+    def graficarAST(self):
+        ast = instruccion(self.texto)
+        return ast.graficar()
+
+    def mostrarAST(self):
+        try:
+            s = self.graficarAST()
+            graph = graphviz.Source(s)
+            graph.view()
+        except Exception as e:
+            messagebox.showerror("Error", str(e))
+
+    def graficar(self):
+        ast = instruccion(self.texto)
+        dot = Digraph(comment='AST', node_attr={'shape': 'circle', 'height': '.1'})
+        ast.graficar_nodo(dot, None, ast)
+        return dot.source
+
+
 r = Pantalla_Principal()
