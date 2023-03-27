@@ -1,39 +1,38 @@
 from Instrucciones.aritmeticas import *
 from Instrucciones.trigonometricas import *
+from Instrucciones.Errores import *
 from Abstract.lexema import *
 from Abstract.numero import *
-from graphviz import Digraph
 
-#Patron, Lexema, Token
-#Diccionarios
-reserved = {
-    'ROPERACION' : 'Operacion',
-    'RVALOR1'    : 'Valor1',
-    'RVALOR2'    :  'Valor2',
-    'RSUMA'      : 'Suma',
-    'RRESTA'     : 'Resta',
-    'RMULTIPLICACION':'Multiplicacion',
-    'RDIVISION' : 'Division',
-    'RPOTENCIA' : 'Potencia',
-    'RRAIZ'     : 'Raiz',
-    'RINVERSO'  : 'Inverso',
-    'RSENO'     : 'Seno',
-    'RCOSENO'   : 'Coseno',
-    'RTANGENTE' : 'Tangente',
-    'RMODULO'   : 'Modulo',
-    'RTEXTO'    : 'Texto',
-    'RCOLORFONDONDO' : 'Color-Fondo-Nodo',
-    'RCOLORFUENTENODO' : 'Color-Fuente-Nodo',
-    'RFORMANODO' : 'Forma-Nodo',
-    'COMA'      : ',',
-    'PUNTO'     : '.',
-    'DPUNTOS'   : ':',
-    'CORI'      : '[',
-    'CORD'      : ']',
-    'LLAVEI'    : '{',
-    'LLAVED'    : '}',
 
+#Este es un listado de palabras reservadas como lo son multiplicacion y asi, RTEXTO es un token
+reserved = { 
+    'OPERACION'         : 'Operacion',
+    'RVALOR1'            : 'Valor1',
+    'RVALOR2'           : 'Valor2',
+    'RSUMA'             : 'Suma',
+    'RMULTIPLICACION'   : 'Multiplicacion', 
+    'RDIVISION'         : 'Division',
+    'RPOTENCIA'         : 'Potencia',
+    'RRAIZ'             : 'Raiz',   
+    'RINVERSO'          : 'Inverso',
+    'RSENO'             : 'Seno',
+    'RCOSENO'           : 'Coseno',
+    'RTANGENTE'         : 'Tangente',
+    'RMODULO'           : 'Modulo',
+    'RTEXTO'            : 'Texto',
+    'RCOLORFONDONODO'   : 'Color-Fondo-Nodo',
+    'RCOLORFUENTENODO'  : 'Color-Fuente-Nodo',
+    'RFORMANODO'        : 'Forma-Nodo',  
+    'COMA'              : ',',
+    'PUNTO'             : '.',
+    'DPUNTO'            : ':',
+    'CORI'              : '[',
+    'CORD'              : ']',
+    'LLAVEI'            : '{',
+    'LLAVED'            : '}',
 }
+
 #Convertimos el diccionario de arriba en una lista con el nombre lexemas
 
 lexemas = list(reserved.values())
@@ -43,11 +42,13 @@ global n_lineas
 global n_columnas   
 global instrucciones
 global lista_lexemas
+global lista_errores
 
 n_lineas = 1
 n_columnas = 1
 lista_lexemas = []
 instrucciones = []
+lista_errores = []
 
 #Metodo que recibe una cadea donde mando a llamar a mi liena y columna
 
@@ -102,7 +103,12 @@ def instruccion(cadena):
             puntero = 0
             n_lineas += 1
             n_columnas = 1
+        elif char == ':' or char == ',' or char == '.' or char == '}' or char == '{' or char == '\r' or char == ' ': #Esto nos ayuda por si en dado caso viene uno de esos signos y reconocerlos 
+            n_columnas += 1
+            cadena = cadena[1:]
+            puntero = 0
         else: 
+            lista_errores.append(Errores(char, n_lineas, n_columnas)) #Estos crea la lista de errores en dado caso la letras no es renocible y asi genera los errores
             cadena = cadena[1:]
             puntero = 0
             n_columnas += 1
@@ -151,8 +157,9 @@ def operar():
     n2 = ''
     while lista_lexemas:                            
         lexema = lista_lexemas.pop(0)       
-        if lexema.operar(None) == 'Operacion':             
-            operacion = lista_lexemas.pop(0)
+        if lexema.operar(None) == 'Operacion':  
+            if lista_lexemas:       
+                operacion = lista_lexemas.pop(0)
         elif lexema.operar(None) == 'Valor1':
             n1 = lista_lexemas.pop(0)
             if n1.operar(None) == '[':
@@ -183,28 +190,46 @@ def operar2():
     #for instruccion in instrucciones:
         #print(instruccion.operar())
     return instrucciones
-def graficar_nodo(dot, padre, hijo):
-    if hijo is not None:
-        hijo_id = str(hash(hijo))
-        if not hijo_id in dot.body:
-            dot.node(hijo_id, hijo.instruccion)
-            dot.edge(str(padre), hijo_id)
-            for nieto in hijo.hijos:
-                graficar_nodo(dot, hijo_id, nieto)
+        
 
-def graficar(instruccion):
-    dot = Digraph(comment='AST')
-    dot.node(str(hash(instruccion)), instruccion.instruccion)
-    for hijo in instruccion.hijos:
-        graficar_nodo(dot, hash(instruccion), hijo)
-    return dot.source
+def getErrores():
+    global lista_errores
+    return lista_errores
 
+    
+def grafica(self):
+        vacio= ''
+        titulo,fondo,fuente,forma = vacio,vacio,vacio,vacio
+        posicion =0
 
-'''def errores():
-    global n_lineas
-    global n_columnas
-    global lista_lexemas
-    lexema = ''
-    puntero = ''
-    if char ==''' 
+        for atributo in self.atributo_lista:
+            atri = atributo.verificar()
 
+            if atri[posicion] == '"texto"':
+                titulo = atri[1]
+                print(titulo)
+            elif atri[posicion] == '"color_fondo"':
+                fondo = atri[1]
+                print(fondo)
+            elif atri[posicion] == '"color_fuente"':
+                fuente = atri[1]
+                print(fuente)
+            elif atri[posicion] == '"forma"':
+                forma = atri[1]
+                print(forma)
+
+        self.texto = 'digraph\treporte{'
+        self.texto += '\n\t\trankdir="TB"'
+        self.texto += f'\n\t\tlabel="{titulo}"'
+        self.texto += f'\n\t\tlabelloc="t"'
+        self.texto += f'\n\t\tnode[shape={forma} fontcolor={fuente} style="filled" fillcolor={fondo}]'
+        self.texto += f'\n\t\tgraph[ordering="out"]'
+
+        for op in self.operaciones:
+            actual = op.evaluar()[posicion]
+            self.texto += actual
+
+        self.texto += '\n\n}'
+
+        with open('Grafica.dot', 'w', encoding='utf-8') as archivo:
+            archivo.write(self.texto)
