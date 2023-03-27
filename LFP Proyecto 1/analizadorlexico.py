@@ -196,39 +196,3 @@ def getErrores():
     return lista_errores
 
     
-def grafica(self):
-        vacio= ''
-        titulo,fondo,fuente,forma = vacio,vacio,vacio,vacio
-        posicion =0
-
-        for atributo in self.atributo_lista:
-            atri = atributo.verificar()
-
-            if atri[posicion] == '"texto"':
-                titulo = atri[1]
-                print(titulo)
-            elif atri[posicion] == '"color_fondo"':
-                fondo = atri[1]
-                print(fondo)
-            elif atri[posicion] == '"color_fuente"':
-                fuente = atri[1]
-                print(fuente)
-            elif atri[posicion] == '"forma"':
-                forma = atri[1]
-                print(forma)
-
-        self.texto = 'digraph\treporte{'
-        self.texto += '\n\t\trankdir="TB"'
-        self.texto += f'\n\t\tlabel="{titulo}"'
-        self.texto += f'\n\t\tlabelloc="t"'
-        self.texto += f'\n\t\tnode[shape={forma} fontcolor={fuente} style="filled" fillcolor={fondo}]'
-        self.texto += f'\n\t\tgraph[ordering="out"]'
-
-        for op in self.operaciones:
-            actual = op.evaluar()[posicion]
-            self.texto += actual
-
-        self.texto += '\n\n}'
-
-        with open('Grafica.dot', 'w', encoding='utf-8') as archivo:
-            archivo.write(self.texto)
