@@ -3,7 +3,7 @@ from tkinter import *
 from tkinter import ttk
 from tkinter.filedialog import askopenfilename
 from tkinter import filedialog
-from analizadorlexico import instruccion, operar2
+from analizadorlexico import instruccion, operando, getErrores
 import tkinter as tk
 import os
 from tkinter import messagebox
@@ -76,7 +76,7 @@ class Pantalla_Principal():
         
     def ejecutar(self):
         instruccion(self.texto)
-        respuestas = operar2()
+        respuestas = operando()
         resultado = ""
         for respuesta in respuestas:
             resultado += str(respuesta.operar(None)) + "\n"
