@@ -13,7 +13,9 @@ from Instrucciones.Errores import Errores
 from analizadorlexico import lista_errores
 
 def write_errors_to_file(filename, errors):
-        with open(filename, "w") as f:
+        filename = filedialog.asksaveasfilename(defaultextension=".json", filetypes=[("JSON Files", "*.json")])
+        if filename:
+         with open(filename, "w") as f:
             for error in errors:
                 f.write(str(error.operar(errors.index(error) + 1)))
                 f.write("\n")
