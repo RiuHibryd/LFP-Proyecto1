@@ -8,34 +8,33 @@ class Aritmeticas(Expression):
         self.tipo = tipo
         super().__init__(fila, columna)
         
-#Este metodo realiza la operacion donde entra al lado derecho e ingresa despues vuelva y devuelve el valor izquiero
-#Recursivdad
 
-    def operar(self, arbol):
+    
+    def operar(self, arbol):    #Operar
         leftValue = ''
         rightValue = ''
-        if self.left != None:
-            leftValue = self.left.operar(arbol)   #aqui me devuelve el valor de un numero ya sea entero o decimal
-        if self.right != None:
-            rightValue = self.right.operar(arbol) #aqui me devuelve el valor de un numero ya sea entero o decimal
+        if self.left != None:   #Si el nodo izquierdo no es nulo
+            leftValue = self.left.operar(arbol)   #Se obtiene el valor del nodo izquierdo
+        if self.right != None:  #Si el nodo derecho no es nulo
+            rightValue = self.right.operar(arbol) #Se obtiene el valor del nodo derecho
     
-        if self.tipo.operar(arbol) == 'Suma':
-            return leftValue + rightValue
-        elif self.tipo.operar(arbol)  == 'Resta':
-            return leftValue - rightValue
-        elif self.tipo.operar(arbol)  == 'Multiplicacion':
-            return leftValue * rightValue
-        elif self.tipo.operar(arbol)  == 'Division':
-            return leftValue / rightValue
-        elif self.tipo.operar(arbol)  == 'Modulo':
-            return leftValue % rightValue
-        elif self.tipo.operar(arbol)  == 'Potencia':
-            return leftValue ** rightValue
-        elif self.tipo.operar(arbol)  == 'Raiz':
-            return leftValue ** (1/rightValue)
-        elif self.tipo.operar(arbol)  == 'Inverso':
-            return 1/leftValue
-        else:
+        if self.tipo.operar(arbol) == 'Suma': #Si el tipo de operacion es suma
+            return leftValue + rightValue #Se retorna la suma de los valores
+        elif self.tipo.operar(arbol)  == 'Resta': #Si el tipo de operacion es resta
+            return leftValue - rightValue # Se retorna la resta de los valores
+        elif self.tipo.operar(arbol)  == 'Multiplicacion': #Si el tipo de operacion es multiplicacion
+            return leftValue * rightValue # Se retorna la multiplicacion de los valores
+        elif self.tipo.operar(arbol)  == 'Division': #Si el tipo de operacion es division
+            return leftValue / rightValue # Se retorna la division de los valores
+        elif self.tipo.operar(arbol)  == 'Modulo': #Si el tipo de operacion es modulo
+            return leftValue % rightValue # Se retorna el modulo de los valores
+        elif self.tipo.operar(arbol)  == 'Potencia': #Si el tipo de operacion es potencia
+            return leftValue ** rightValue # Se retorna la potencia de los valores
+        elif self.tipo.operar(arbol)  == 'Raiz': #Si el tipo de operacion es raiz
+            return leftValue ** (1/rightValue) # Se retorna la raiz de los valores
+        elif self.tipo.operar(arbol)  == 'Inverso': #Si el tipo de operacion es inverso
+            return 1/leftValue # Se retorna el inverso de los valores
+        else: 
             return None
         
     def getFila(self):
