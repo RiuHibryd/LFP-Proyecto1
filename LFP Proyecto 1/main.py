@@ -38,7 +38,7 @@ class Pantalla_Principal():
 
         Button(self.Frame, command=self.ejecutar, text="Ejecutar", font=("Arial Black Italic", 18), fg="AntiqueWhite3", bg="blue4", width=15).place(x=50, y=350)
 
-        Button(self.Frame, command=self.generar_error_file,text="Errores", font=("Arial Black Italic", 18), fg="AntiqueWhite3", bg="red1", width=15).place(x=50, y=450)
+        Button(self.Frame, text="Errores", font=("Arial Black Italic", 18), fg="AntiqueWhite3", bg="red1", width=15).place(x=50, y=450)
 
         Button(self.Frame, text="Cerrar Ventana", command=self.PP.destroy, font=("Arial Black Italic", 18), fg="AntiqueWhite3", bg="red2", width=15).place(x=50, y=550)
 
@@ -109,18 +109,6 @@ class Pantalla_Principal():
             graph.view()
         except Exception as e:
             messagebox.showerror("Error", str(e))
-    def generar_error_file(errores):
-        # Create the dot object
-        dot = Digraph(comment='Errores', format='pdf')
-        
-        # Add nodes to the graph for each error
-        for i, error in enumerate(errores):
-            dot.node(str(i), error.operar(i + 1))
-            
-        # Generate the PDF file
-        dot.render('errores', view=True)
-        
-        # Show a success message to the user
-        messagebox.showinfo("Generar archivo", "Archivo generado con éxito")
+
 
 r = Pantalla_Principal()
