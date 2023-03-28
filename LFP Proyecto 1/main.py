@@ -12,6 +12,13 @@ from graphviz import Digraph
 from Instrucciones.Errores import Errores
 from analizadorlexico import lista_errores
 
+def write_errors_to_file(filename, errors):
+        with open(filename, "w") as f:
+            for error in errors:
+                f.write(str(error.operar(errors.index(error) + 1)))
+                f.write("\n")
+
+
 class Pantalla_Principal():
     
     def __init__(self):
@@ -39,15 +46,15 @@ class Pantalla_Principal():
 
         Button(self.Frame, command=self.ejecutar, text="Ejecutar", font=("Arial Black Italic", 18), fg="AntiqueWhite3", bg="blue4", width=15).place(x=50, y=350)
 
-        Button(self.Frame, text="Errores", font=("Arial Black Italic", 18), fg="AntiqueWhite3", bg="red1", width=15, command=lambda: write_errors_to_file("errors.txt", errores)).place(x=50, y=450)
+        Button(self.Frame, text="Errores", font=("Arial Black Italic", 18), fg="AntiqueWhite3", bg="red1", width=15, command=lambda: write_errors_to_file("errors.txt", lista_errores)).place(x=50, y=450)
 
         Button(self.Frame, text="Cerrar Ventana", command=self.PP.destroy, font=("Arial Black Italic", 18), fg="AntiqueWhite3", bg="red2", width=15).place(x=50, y=550)
 
-        Button(self.Frame, command = self.abrir_manual_tecnico,text="Manual Tecnico", font=("Arial Black Italic", 18), fg="AntiqueWhite2", bg="azure4", width=14).place(x=400, y=50)
+        Button(self.Frame, command=self.abrir_manual_tecnico,text="Manual Tecnico", font=("Arial Black Italic", 18), fg="AntiqueWhite2", bg="azure4", width=14).place(x=400, y=50)
 
         Button(self.Frame, command=self.abrir_manual_usuario, text="Manual de Usuario", font=("Arial Black Italic", 18), fg="AntiqueWhite1", bg="azure4", width=14).place(x=400, y=150)
 
-        Button(self.Frame, text="Ayuda", font=("Arial Black Italic", 18), fg="AntiqueWhite1", bg="azure4", width=10).place(x=425, y=250)
+        Button(self.Frame,command=self.abrir_ayuda, text="Ayuda", font=("Arial Black Italic", 18), fg="AntiqueWhite1", bg="azure4", width=10).place(x=425, y=250)
 
         Button(self.Frame, command = self.mostrarAST, text="Mostrar AST", font=("Arial Black Italic", 18), fg="AntiqueWhite1", bg="azure4", width=10).place(x=425, y=350)
        
@@ -85,7 +92,7 @@ class Pantalla_Principal():
             
     def abrir_manual_usuario(self):
         try:
-            path = '[PI]Manual de Usuario.pdf'
+            path = '[LFP]Manual de Usuario.pdf'
             os.startfile(path)
         except:
             print("No se pudo abrir el archivo")
@@ -97,17 +104,18 @@ class Pantalla_Principal():
                 outfile.write(self.texto)
     def abrir_manual_tecnico(self):
         try:
-            path = '[PI]Manual Tecnico.pdf'
+            path = '[LFP]Manual Tecnico.pdf'
             os.startfile(path)
         
         except:
             print("No se pudo abrir el archivo")
-
-    def write_errors_to_file(filename, errors):
-        with open(filename, "w") as f:
-            for error in errors:
-                f.write(str(error.operar(errors.index(error) + 1)))
-                f.write("\n")
+    def abrir_ayuda(self):
+        try:
+            path = '[LFP]Ayuda.pdf'
+            os.startfile(path)
+        
+        except:
+            print("No se pudo abrir el archivo")
 
   
 

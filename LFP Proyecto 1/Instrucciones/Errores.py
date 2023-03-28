@@ -12,7 +12,7 @@ class Errores(Expression):
             "No.": no,
             "Descripcion-Token": {
                 "Lexema": self.lexema,
-                "Tipo": "Error Leximo",
+                "Tipo": "Error Lexico",
                 "Fila": self.fila,
                 "Columna": self.columna
             }
