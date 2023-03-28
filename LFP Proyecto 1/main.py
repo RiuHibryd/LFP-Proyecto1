@@ -84,7 +84,8 @@ class Pantalla_Principal():
             
     def abrir_manual_usuario(self):
         try:
-            os.startfile("./manual_de_Usuario.pdf")
+            path = '[PI]Manual de Usuario.pdf'
+            os.startfile(path)
         except:
             print("No se pudo abrir el archivo")
             
@@ -95,7 +96,9 @@ class Pantalla_Principal():
                 outfile.write(self.texto)
     def abrir_manual_tecnico(self):
         try:
-            os.startfile("./manual_tecnico.pdf")
+            path = '[PI]Manual Tecnico.pdf'
+            os.startfile(path)
+        
         except:
             print("No se pudo abrir el archivo")
 
