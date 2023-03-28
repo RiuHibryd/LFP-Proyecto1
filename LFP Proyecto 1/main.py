@@ -10,6 +10,7 @@ from tkinter import messagebox
 import graphviz
 from graphviz import Digraph
 from Instrucciones.Errores import Errores
+from analizadorlexico import lista_errores
 
 class Pantalla_Principal():
     
@@ -38,7 +39,7 @@ class Pantalla_Principal():
 
         Button(self.Frame, command=self.ejecutar, text="Ejecutar", font=("Arial Black Italic", 18), fg="AntiqueWhite3", bg="blue4", width=15).place(x=50, y=350)
 
-        Button(self.Frame, text="Errores", font=("Arial Black Italic", 18), fg="AntiqueWhite3", bg="red1", width=15).place(x=50, y=450)
+        Button(self.Frame, text="Errores", font=("Arial Black Italic", 18), fg="AntiqueWhite3", bg="red1", width=15, command=lambda: write_errors_to_file("errors.txt", errores)).place(x=50, y=450)
 
         Button(self.Frame, text="Cerrar Ventana", command=self.PP.destroy, font=("Arial Black Italic", 18), fg="AntiqueWhite3", bg="red2", width=15).place(x=50, y=550)
 
@@ -102,7 +103,13 @@ class Pantalla_Principal():
         except:
             print("No se pudo abrir el archivo")
 
- 
+    def write_errors_to_file(filename, errors):
+        with open(filename, "w") as f:
+            for error in errors:
+                f.write(str(error.operar(errors.index(error) + 1)))
+                f.write("\n")
+
+  
 
 
 
